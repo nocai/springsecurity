@@ -7,29 +7,15 @@
 	http://www.springframework.org/schema/security
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <context:component-scan base-package="com.liujun.handler"/>
+    <context:component-scan base-package="com.liujun.security"/>
     <http security="none" pattern="/static/**"/>
+
     <http auto-config="true">
-        <intercept-url pattern="/" access="ROLE_USER,ROLE_ADMIN,ROLE_DBA"/>
-        <intercept-url pattern="/home" access="ROLE_USER,ROLE_ADMIN,ROLE_DBA"/>
-        <form-login
-                login-page="/login"
-                default-target-url="/welcome"
-                authentication-failure-url="/login?error"
-                username-parameter="username"
-                password-parameter="password"
-                authentication-success-handler-ref="customSuccessHandler"
-                />
-        <logout logout-success-url="/login?logout"/>
+        <intercept-url pattern="/**" access="ROLE_USER"/>
     </http>
 
     <authentication-manager>
-        <authentication-provider>
-            <user-service>
-                <user name="yiibai" password="123456" authorities="ROLE_USER"/>
-                <user name="admin" password="123456" authorities="ROLE_ADMIN"/>
-                <user name="dba" password="123456" authorities="ROLE_ADMIN,ROLE_DBA"/>
-            </user-service>
+        <authentication-provider user-service-ref="userDetailsServiceImpl">
         </authentication-provider>
     </authentication-manager>
 

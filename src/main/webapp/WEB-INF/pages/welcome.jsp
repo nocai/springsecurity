@@ -14,14 +14,8 @@
 
 <h1>消息 : ${message}</h1>
 
-Dear <strong>${user}</strong>, Welcome to Admin Page.
-<a href="<c:url value="/logout" />">Logout</a>
-
-
-<div>
-    <sec:authorize access="hasRole('ADMIN')">
-        <label><a href="#">Start backup</a> | This part is visible only to one who is both ADMIN</label>
-    </sec:authorize>
+Dear <strong>${username}</strong>, Welcome to Admin Page.
+<a href="/j_spring_security_logout">退出</a>
 </div>
 </body>
 </html>
